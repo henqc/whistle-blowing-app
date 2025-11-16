@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-#Added by Henry
 import os
 from dotenv import load_dotenv
 import dj_database_url
@@ -31,13 +30,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#Added by Henry
 ALLOWED_HOSTS = ['localhost','127.0.0.1','whistleblower-b-21-3d4d90ef9657.herokuapp.com']
 
 
 # Application definition
 
-#CHANGE BACK TO 2 BEFORE MERGING WITH MAIN
 SITE_ID = 2
 
 INSTALLED_APPS = [
@@ -109,7 +106,6 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-#Added by Timothy
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
 if IS_HEROKU_APP:
@@ -188,13 +184,11 @@ LOGIN_REDIRECT_URL = "/whistleblowingapp/signedin/"
 LOGOUT_REDIRECT_URL = "/whistleblowingapp"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-
-#Added by Henry
 try:
     if 'HEROKU' in os.environ:
         import django_heroku
         django_heroku.settings(locals())
 except ImportError:
-    found = False
+    pass
 
 

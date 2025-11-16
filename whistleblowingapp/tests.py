@@ -35,7 +35,6 @@ class userTypeTests(TestCase):
 
     def testIndexView(self):
         response = self.client.get(reverse('whistleblowingapp:whistleblowingapp'))
-        # print("RESPONSE: ", response.content.decode('utf-8'))
         self.assertIn("Log in to Google!", response.content.decode('utf-8'))
 
 class MockUser:
@@ -60,7 +59,6 @@ class differentViewsTests(TestCase):
 
         response = signedin(request)
 
-        #print(response.content.decode('utf-8'))
         self.assertIn(("You are signed in as: " + mockFirst + " "+ mockLast), response.content.decode('utf-8'))
         self.assertIn(("Admin/Staff status: True"), response.content.decode('utf-8'))
 
@@ -73,7 +71,6 @@ class differentViewsTests(TestCase):
 
         response = signedin(request)
 
-        #print(response.content.decode('utf-8'))
         self.assertIn(("You are signed in as: " + mockFirst + " "+ mockLast), response.content.decode('utf-8'))
         self.assertIn(("Admin/Staff status: False"), response.content.decode('utf-8'))
 
@@ -120,39 +117,4 @@ class ReportFormTests(TestCase):
         report = Report.objects.first()
         self.assertEqual(report.reportTitle, 'Another Test Report xxxasdf')
         self.assertEqual(report.reportDescription, 'Detailed description of the report123.')
-
-
-    #TODO: possibly refactor our User model to extend Django AbstractUser idk if necessary??
-
-    # then we could make use of methods like force_login
-    # def testSignedInView(self):
-    #     # self.client = self.client_class()
-    #     # self.client.handler._middleware_chain = MockAuthenticationMiddleware(
-    #     #     self.client.handler._middleware_chain, self.u1
-    #     # )
-    #
-    #     session = self.client.session
-    #     session['user_id'] = self.u1.id
-    #     session.save()
-    #
-    #     response = self.client.get(reverse('whistleblowingapp:signedin'))
-    #     #self.client.force_login(self.u1)
-    #     #mock the user being signed in so that {% if user.is_authenticated %} gets triggered
-    #     print(response.content.decode('utf-8'))
-    #     self.assertNotIn("Log in to Google!", response.content.decode('utf-8'))
-    #     self.assertIn("You are signed in as", response.content.decode('utf-8'))
-    #
-
-    #
-
-    #
-    # class MockAuthenticationMiddleware:
-    #     def __init__(self, get_response, user):
-    #         self.get_response = get_response
-    #         self.user = user
-    #
-    #     def __call__(self, request):
-    #         request.user = self.user
-    #         response = self.get_response(request)
-    #         return response
 
